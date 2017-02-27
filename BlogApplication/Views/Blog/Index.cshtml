@@ -1,0 +1,66 @@
+﻿@model List<BlogApplication.Models.BlogPostModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<li>@Html.ActionLink("Create Blog", "Create", "Blog")</li>
+
+@if (ViewBag.Message != null)
+{
+    <h4>@ViewBag.Message</h4>
+}
+
+<h2>Blog List</h2>
+
+    @foreach (var blog in Model)
+    {
+        <br />
+        <span style="font-size:large; font-weight: bold;">
+            
+            @*<a href="~/blog/edit/@blog.ID">@Html.DisplayFor(modelItem => blog.Title)</a>*@
+
+            @Html.ActionLink(@Html.DisplayFor(modelItem => blog.Title).ToString(), "Edit", new { id = blog.ID })
+            
+                @*@Html.DisplayFor(modelItem => blog.Title)*@
+        </span>
+        @*<p>@Html.Raw(blog.Content.Replace("\r\n", "<br />"))</p>*@
+        <br />
+        <p style="font-size:10px">Posted on @Html.DisplayFor(modelItem => blog.CreateTime)</p>
+        <p>
+            Tagged under:
+            @foreach (var tag in blog.Tags)
+            {
+                <span style="background-color:yellow;">
+                    @*<a href="~/blog/tag/@tag">@tag</a>*@
+                    
+                        @tag
+                    
+                </span>
+                <span>&nbsp;</span>
+                @*if (tagIndex == Model.Tags.Count)
+                {
+                    // In the end, write the edit hyperlink
+                    <span><a href="~/blog/edit/@Model.ID">Edit</a></span>
+                }*@
+
+                //// Finally increment the index
+                //tagIndex++;
+            }
+        </p>
+
+
+        <br />
+        <br />
+
+        @*<span class="tag"><a href="~/blog/tag/@tag">@tag</a></span>
+            if (tagIndex == Model.Tags.Count)
+            {
+                // In the end, write the edit hyperlink
+                <span><a href="~/blog/edit/@Model.ID">Edit</a></span>
+            }*@
+
+    }
+
